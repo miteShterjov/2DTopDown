@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using TopDown.Player;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -9,11 +10,15 @@ namespace TopDown.Weapon
     {
         [SerializeField] private GameObject slashAnimPrefab;
         [SerializeField] private Transform slashAnimSpawnPoint;
+        [SerializeField] private Transform weaponCollider;
+        [SerializeField] private float attackCooldown = 1f; // Cooldown duration in seconds
 
         private InputSystem_Actions inputActions;
         private Animator animator;
         private PlayerController playerController;
         private ActiveWeapon activeWeapon;
+        private GameObject slashVFX;
+        private bool attackButtonDown, isAttacking = false;
 
         void Awake()
         {
@@ -33,12 +38,14 @@ namespace TopDown.Weapon
 
         void Start()
         {
-            inputActions.Player.Attack.started += _ => Attack();
+            inputActions.Player.Attack.started += _ => StartAttacking();
+            inputActions.Player.Attack.canceled += _ => StopAttacking();
         }
 
         void Update()
         {
             MouseFollowWithOffset();
+            Attack();
         }
 
         private void OnEnable()
@@ -46,12 +53,40 @@ namespace TopDown.Weapon
             inputActions.Enable();
         }
 
+        public void SwingUpFlipAnim()
+        {
+            slashVFX.gameObject.transform.rotation = Quaternion.Euler(-180, 0, 0);
+            AdjustAnimToPlayerFacing();
+        }
+
+        public void FinishAttackAnim()
+        {
+            weaponCollider.gameObject.SetActive(false);
+        }
+
+        private void StartAttacking()
+        {
+            attackButtonDown = true;
+        }
+
+        private void StopAttacking()
+        {
+            attackButtonDown = false;
+        }
+
         private void Attack()
         {
-            //fire up the sword animations
-            animator.SetTrigger("Attack");
-            GameObject slashVFX = Instantiate(slashAnimPrefab, slashAnimSpawnPoint.position, Quaternion.identity);
-            slashVFX.transform.parent = this.transform.parent;
+            if (attackButtonDown && !isAttacking)
+            {
+                isAttacking = true;
+                animator.SetTrigger("Attack");
+                weaponCollider.gameObject.SetActive(true);
+                slashVFX = Instantiate(slashAnimPrefab, slashAnimSpawnPoint.position, Quaternion.identity);
+                slashVFX.transform.parent = this.transform.parent;
+                AdjustAnimToPlayerFacing();
+
+                StartCoroutine(AttackCDRoutine());
+            }
         }
 
         private void MouseFollowWithOffset()
@@ -65,11 +100,31 @@ namespace TopDown.Weapon
             if (mousePosition.x < playerPosition.x)
             {
                 activeWeapon.transform.rotation = Quaternion.Euler(0, -180, clampedAngle);
+                weaponCollider.localScale = new Vector3(-1, 1, 1);
             }
             else
             {
                 activeWeapon.transform.rotation = Quaternion.Euler(0, 0, clampedAngle);
+                weaponCollider.localScale = new Vector3(1, 1, 1);
             }
+        }
+
+        private void AdjustAnimToPlayerFacing()
+        {
+            if (playerController.IsFacingLeft)
+            {
+                slashVFX.transform.localScale = new Vector3(-1, 1, 1);
+            }
+            else
+            {
+                slashVFX.transform.localScale = new Vector3(1, 1, 1);
+            }
+        }
+
+        private IEnumerator AttackCDRoutine()
+        {
+            yield return new WaitForSeconds(attackCooldown);
+            isAttacking = false;
         }
     }
 }

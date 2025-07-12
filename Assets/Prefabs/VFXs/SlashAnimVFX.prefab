@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 4860615950914906587}
   - component: {fileID: 209165088491556118}
   - component: {fileID: 5648780005911001306}
-  - component: {fileID: 8582302127173443092}
+  - component: {fileID: 6913108549737744386}
   m_Layer: 0
   m_Name: SlashAnimVFX
   m_TagString: Untagged
@@ -27,7 +27,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8449338053742659519}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -1, y: 0, z: 0, w: -0.00000004371139}
   m_LocalPosition: {x: 1.7, y: -1.01, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -111,7 +111,7 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!114 &8582302127173443092
+--- !u!114 &6913108549737744386
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -123,4 +123,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: de3833b212a90614c8d4095530618ecd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  delay: 0.4
+  delay: 0

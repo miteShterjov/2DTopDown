@@ -30,7 +30,6 @@ namespace TopDown.Enemy
             {
                 Vector2 roamPosition = GetNewRoamingPosition();
                 enemyPathfinding.MoveTowards(roamPosition);
-                print($"Roaming to position: {roamPosition}");
                 yield return new WaitForSeconds(2f);
             }
         }

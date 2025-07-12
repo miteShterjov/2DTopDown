@@ -101,6 +101,9 @@ GameObject:
   - component: {fileID: 1302787880532077372}
   - component: {fileID: 1482310692390099556}
   - component: {fileID: 3169591388267261275}
+  - component: {fileID: 5019259228645074640}
+  - component: {fileID: 9047290470958503884}
+  - component: {fileID: 899792926925464500}
   m_Layer: 0
   m_Name: Enemy_Slime
   m_TagString: Untagged
@@ -268,3 +271,46 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 3
+--- !u!114 &5019259228645074640
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7849337402808097782}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f8b9b69a08cf0934d8c306aa48f74f07, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHealth: 2
+  deathVFXPrefab: {fileID: 2842642343121511346, guid: a968980cc75277d44a5a10d8795b5747,
+    type: 3}
+--- !u!114 &9047290470958503884
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7849337402808097782}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1f125ca9d8a5d9e469495c7ac8ccb86e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  knockbackDuration: 0.5
+  knockbackForce: 4
+--- !u!114 &899792926925464500
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7849337402808097782}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2ff1a65daa6b8a84dbbede10518f2020, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  flashMaterial: {fileID: 2100000, guid: 945b72d50ee17314cadfa15854d43734, type: 2}
+  restoreTime: 0.2
