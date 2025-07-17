@@ -1,12 +1,11 @@
 using System;
+using TopDown.SceneManagment;
 using UnityEngine;
 
 namespace TopDown.Player
 {
-    public class PlayerController : MonoBehaviour
+    public class PlayerController : Singleton<PlayerController>
     {
-        public static PlayerController Instance { get; private set; }
-
         public bool IsFacingLeft { get => isFacingLeft; set => isFacingLeft = value; }
 
         [SerializeField] private TrailRenderer trailRenderer;
@@ -26,10 +25,9 @@ namespace TopDown.Player
         private float dashCooldownTimer = 0f;
 
 
-        private void Awake()
+        protected override void Awake()
         {
-            if (Instance == null) Instance = this;
-            else if (Instance != this) Destroy(gameObject);
+            base.Awake(); // Call the base Awake method to ensure singleton behavior
 
             inputActions = new InputSystem_Actions();
             rb = GetComponent<Rigidbody2D>();

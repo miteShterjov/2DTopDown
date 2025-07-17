@@ -168,8 +168,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: -1869315837
-  m_SortingLayer: 1
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
   m_SortingOrder: 2
   m_Sprite: {fileID: -584955555, guid: 4382949da28ad114c8408fe9a6a84aba, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -286,6 +286,7 @@ MonoBehaviour:
   maxHealth: 2
   deathVFXPrefab: {fileID: 2842642343121511346, guid: a968980cc75277d44a5a10d8795b5747,
     type: 3}
+  isDeadRespawn: 0
 --- !u!114 &9047290470958503884
 MonoBehaviour:
   m_ObjectHideFlags: 0

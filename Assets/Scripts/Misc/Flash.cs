@@ -11,17 +11,19 @@ namespace TopDown.Misc
         private Material originalMaterial;
         private SpriteRenderer spriteRenderer;
 
+        public Material OriginalMaterial { get => originalMaterial; set => originalMaterial = value; }
+
         void Awake()
         {
             spriteRenderer = GetComponent<SpriteRenderer>();
-            originalMaterial = spriteRenderer.material;
+            OriginalMaterial = spriteRenderer.material;
         }
 
         public IEnumerator FlashCoroutine()
         {
             spriteRenderer.material = flashMaterial;
             yield return new WaitForSeconds(restoreTime);
-            spriteRenderer.material = originalMaterial;
+            spriteRenderer.material = OriginalMaterial;
         }   
     }
 }
