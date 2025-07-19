@@ -13,7 +13,6 @@ namespace TopDown.SceneManagment
             else instance = (T)this;
 
             DontDestroyOnLoad(gameObject);
-
         }
     }
 }
