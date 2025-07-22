@@ -41,6 +41,9 @@ namespace TopDown.Player
             mouseWorldPosition = Camera.main.ScreenToWorldPoint(mouseScreenPosition);
             direction = (mouseWorldPosition - (Vector2)transform.position).normalized;
 
+            if (direction.x < 0) PlayerController.Instance.IsFacingLeft = true;
+            else PlayerController.Instance.IsFacingLeft = false;
+
             snappedDIrection = SnapDIrection(direction);
 
             animator.SetFloat("lookX", snappedDIrection.x);
