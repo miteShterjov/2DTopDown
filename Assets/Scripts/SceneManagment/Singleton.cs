@@ -12,7 +12,7 @@ namespace TopDown.SceneManagment
             if (instance != null && this.gameObject != null) Destroy(this.gameObject);
             else instance = (T)this;
 
-            DontDestroyOnLoad(gameObject);
+            if (!gameObject.transform.parent) DontDestroyOnLoad(gameObject);
         }
     }
 }
