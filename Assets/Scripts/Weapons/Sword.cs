@@ -5,26 +5,22 @@ using UnityEngine.InputSystem;
 
 namespace TopDown.Weapons
 {
-    public class Sword : MonoBehaviour
+    public class Sword : MonoBehaviour, IWeapon
     {
         [SerializeField] private GameObject slashAnimPrefab;
         [SerializeField] private Transform slashAnimSpawner;
         [SerializeField] private Transform weaponColider;
-        private InputSystem_Actions inputActions;
+        [SerializeField] private float attackCooldown = 1f; // Example cooldown value
         private Animator animator;
         private ActiveWeapon activeWeapon;
         private GameObject slashVFX;
 
+        public float AttackCooldown { get => attackCooldown; set => attackCooldown = value; }
+
         private void Awake()
         {
-            inputActions = new InputSystem_Actions();
             animator = GetComponent<Animator>();
             activeWeapon = GetComponentInParent<ActiveWeapon>();
-        }
-
-        void Start()
-        {
-            inputActions.Player.Attack.started += _ => Attack();
         }
 
         void Update()
@@ -32,18 +28,7 @@ namespace TopDown.Weapons
             SwordUpdateDirectionAndOffset();
         }
 
-        private void OnEnable()
-        {
-            inputActions.Enable();
-        }
-
-        private void OnDisable()
-        {
-            inputActions.Disable();
-            inputActions.Player.Attack.started -= _ => Attack();
-        }
-
-        private void Attack()
+        public void Attack()
         {
             animator.SetTrigger("Attack");
             weaponColider.gameObject.SetActive(true);
