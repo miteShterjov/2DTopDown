@@ -8,19 +8,31 @@ namespace TopDown.Weapons
     public class Sword : MonoBehaviour, IWeapon
     {
         [SerializeField] private GameObject slashAnimPrefab;
-        [SerializeField] private Transform slashAnimSpawner;
-        [SerializeField] private Transform weaponColider;
+        [SerializeField] private WeaponInfo weaponInfo;
+        
         [SerializeField] private float attackCooldown = 1f; // Example cooldown value
         private Animator animator;
         private ActiveWeapon activeWeapon;
         private GameObject slashVFX;
+        private Transform slashAnimSpawner;
+        private Transform weaponColider;
+        private PlayerController playerController;
 
         public float AttackCooldown { get => attackCooldown; set => attackCooldown = value; }
 
         private void Awake()
         {
             animator = GetComponent<Animator>();
-            activeWeapon = GetComponentInParent<ActiveWeapon>();
+            activeWeapon = ActiveWeapon.Instance;
+            playerController = PlayerController.Instance;
+        }
+
+        void Start()
+        {
+            slashAnimSpawner = playerController.GetSlashAnimSpawner();
+            if (slashAnimSpawner == null) Debug.LogError("SlashAnimSpawner not found in Sword's parent.");
+            weaponColider = playerController.GetWeaponCollider();
+            if (weaponColider == null) Debug.LogError("WeaponCollider not found in Sword's parent.");
         }
 
         void Update()
@@ -48,6 +60,8 @@ namespace TopDown.Weapons
             AdjustAnimToPlayerFacing();
         }
 
+        public WeaponInfo GetWeaponInfo() { return weaponInfo; }
+        
         private void AdjustAnimToPlayerFacing()
         {
             if (PlayerController.Instance.IsFacingLeft)
@@ -81,5 +95,7 @@ namespace TopDown.Weapons
                 weaponColider.localScale = new Vector3(-1, 1, 1);
             }
         }
+
+        
     }
 }

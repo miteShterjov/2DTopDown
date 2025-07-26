@@ -47,14 +47,27 @@ namespace TopDown.ActionBars
 
         private void ChangeActiveWeapon()
         {
-            if (ActiveWeapon.Instance.CurrentActiveWeapon != null)
+            if (ActiveWeapon.Instance.CurrentActiveWeapon != null) Destroy(ActiveWeapon.Instance.CurrentActiveWeapon.gameObject);
+
+            Transform childTransform = transform.GetChild(activeSlotIndexNum);
+            InventorySlot inventorySlot = childTransform.GetComponentInChildren<InventorySlot>();
+            WeaponInfo weaponInfo = inventorySlot?.WeaponInfo;
+            GameObject weaponToSpawn = weaponInfo?.weaponPrefab;
+
+            if (weaponInfo == null)
             {
-                Destroy(ActiveWeapon.Instance.CurrentActiveWeapon.gameObject);
+                ActiveWeapon.Instance.WeaponNull();
+                return;
             }
 
-            GameObject weaponToSpawn = transform.GetChild(activeSlotIndexNum).GetComponent<InventorySlot>().WeaponInfo.weaponPrefab;
 
-            GameObject newWeapon = Instantiate(weaponToSpawn, ActiveWeapon.Instance.transform.position, Quaternion.identity);
+            GameObject newWeapon = Instantiate(
+                            weaponToSpawn,
+                            ActiveWeapon.Instance.transform.position,
+                            Quaternion.identity
+                            );
+
+            ActiveWeapon.Instance.transform.rotation = Quaternion.Euler(0, 0, 0);
             newWeapon.transform.SetParent(ActiveWeapon.Instance.transform);
 
             ActiveWeapon.Instance.NewWeapon(newWeapon.GetComponent<MonoBehaviour>());

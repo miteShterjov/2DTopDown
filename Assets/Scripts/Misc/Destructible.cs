@@ -1,4 +1,5 @@
 using TopDown.Damage;
+using TopDown.Weapons;
 using UnityEngine;
 
 namespace TopDown.Misc
@@ -12,7 +13,7 @@ namespace TopDown.Misc
 
         private void OnTriggerEnter2D(Collider2D other)
         {
-            if (other.gameObject.GetComponent<DamageSource>())
+            if (other.gameObject.GetComponent<DamageSource>() || other.gameObject.GetComponent<Projectile>())
             {
                 deathVFX = Instantiate(destroyVFX, transform.position, Quaternion.identity);
                 deathVFX.transform.SetParent(this.transform);

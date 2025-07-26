@@ -25,21 +25,17 @@ namespace TopDown.Weapons
             inputActions.Player.Attack.started += _ => Attack();
         }
 
-        private void OnEnable()
-        {
-            inputActions.Enable();
-        }
+        private void OnEnable() => inputActions.Enable();
 
-        public void NewWeapon(MonoBehaviour neWeapon)
-        {
-            CurrentActiveWeapon = neWeapon;
-        }
+        public void NewWeapon(MonoBehaviour newWeapon) => CurrentActiveWeapon = newWeapon;
+
+        public void WeaponNull() => CurrentActiveWeapon = null;
 
         private void Attack()
         {
-            if (isAttacking) return;
+            if (isAttacking && CurrentActiveWeapon as IWeapon == null) return;
 
-            (CurrentActiveWeapon as IWeapon).Attack();
+            (CurrentActiveWeapon as IWeapon)?.Attack();
             isAttacking = true;
 
             StartCoroutine(WaitForAttackCooldownRoutine());
@@ -47,9 +43,9 @@ namespace TopDown.Weapons
 
         private IEnumerator WaitForAttackCooldownRoutine()
         {
-            print("Waiting for attack cooldown...");
+            if (CurrentActiveWeapon as IWeapon == null) yield break;
+
             yield return new WaitForSeconds((CurrentActiveWeapon as IWeapon).AttackCooldown);
-            print("Attack cooldown finished.");
             isAttacking = false;
         }
     }

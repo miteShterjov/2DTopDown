@@ -6,5 +6,6 @@ namespace TopDown.Weapons
     {
         float AttackCooldown { get; }
         void Attack();
+        WeaponInfo GetWeaponInfo();
     }
 }

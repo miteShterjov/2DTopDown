@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using TopDown.SceneManagment;
 using UnityEngine;
+using UnityEngine.Video;
 
 namespace TopDown.Player
 {
@@ -11,6 +12,8 @@ namespace TopDown.Player
         [SerializeField] private float dashSpeed = 2f;
         [SerializeField] private float dashCooldown = 0.75f;
         [SerializeField] private TrailRenderer dashTrail;
+        [SerializeField] private Transform weaponCollider;
+        [SerializeField] private Transform slashAnimSpawner;
 
         private InputSystem_Actions inputActions;
         private Vector2 movementInput;
@@ -47,6 +50,10 @@ namespace TopDown.Player
         {
             PlayerMovement();
         }
+
+        public Transform GetWeaponCollider() { return weaponCollider; }
+        public Transform GetSlashAnimSpawner() { return slashAnimSpawner; }
+            
 
         private void PlayerMovement()
         {
