@@ -8,6 +8,11 @@ namespace TopDown.SceneManagment
     {
         private CinemachineCamera cinemachineCamera;
 
+        void Start()
+        {
+            SetPlayerCameraFollow();
+        }
+
         public void SetPlayerCameraFollow()
         {
             cinemachineCamera = FindObjectsByType<CinemachineCamera>(FindObjectsSortMode.None)[0];

@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using TopDown.Misc;
 using TopDown.SceneManagment;
 using UnityEngine;
 using UnityEngine.Video;
@@ -19,7 +20,7 @@ namespace TopDown.Player
         private Vector2 movementInput;
         private Rigidbody2D rb;
         private bool isFacingLeft;
-        
+
         private float dashDuration = .2f;
         private bool isDashing = false;
 
@@ -53,19 +54,20 @@ namespace TopDown.Player
 
         public Transform GetWeaponCollider() { return weaponCollider; }
         public Transform GetSlashAnimSpawner() { return slashAnimSpawner; }
-            
+
 
         private void PlayerMovement()
         {
+            if (GetComponent<Knockback>().IsKnockbacked) return;
             rb.MovePosition(rb.position + MovementInput * moveSpeed * Time.fixedDeltaTime);
         }
 
-        private void OnEnable()
+        public void OnEnable()
         {
             inputActions.Enable();
         }
 
-        private void OnDisable()
+        public void OnDisable()
         {
             inputActions.Disable();
         }

@@ -30,5 +30,8 @@ namespace TopDown.Enemy
             moveDirection = (targetPosition - rb.position).normalized;
         }
 
+        public void StopMoving() => moveDirection = Vector3.zero;
+        
+
     }
 }

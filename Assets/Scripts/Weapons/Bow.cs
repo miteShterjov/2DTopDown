@@ -23,7 +23,7 @@ namespace TopDown.Weapons
             arrow.transform.localScale = new Vector3(-1f * arrow.transform.localScale.x,
                                          arrow.transform.localScale.y,
                                          arrow.transform.localScale.z);
-            arrow.GetComponent<Projectile>().UpdateWeaponInfo(weaponInfo);
+            arrow.GetComponent<Projectile>().UpdateProjectileRange(weaponInfo.weaponRange);
         }
 
         public WeaponInfo GetWeaponInfo()
