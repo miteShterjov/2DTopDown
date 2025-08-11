@@ -7,7 +7,7 @@ namespace TopDown.Enemy
     public class EnemyAI : MonoBehaviour
     {
         [SerializeField] private float roamChangeDirFloat;
-        [SerializeField] private float attackRange = 5f;
+        [SerializeField] private float attackRange = 0f;
         [SerializeField] private float attackCooldown = 1f;
         [SerializeField] private MonoBehaviour enemyType;
         [SerializeField] private bool stopMovingWhileAttacking;

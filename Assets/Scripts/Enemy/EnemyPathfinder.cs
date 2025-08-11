@@ -8,11 +8,13 @@ namespace TopDown.Enemy
         [SerializeField] private float moveSpeed = 2f;
 
         private Rigidbody2D rb;
+        private SpriteRenderer spriteRenderer;
         private Vector2 moveDirection;
 
         private void Awake()
         {
             rb = GetComponent<Rigidbody2D>();
+            spriteRenderer = GetComponent<SpriteRenderer>();
         }
 
         private void FixedUpdate()
@@ -21,8 +23,8 @@ namespace TopDown.Enemy
 
             rb.MovePosition(rb.position + moveDirection * (moveSpeed * Time.fixedDeltaTime));
 
-            if (moveDirection.x < 0) GetComponent<SpriteRenderer>().flipX = true;
-            else GetComponent<SpriteRenderer>().flipX = false;
+            if (moveDirection.x < 0) spriteRenderer.flipX = true;
+            else if(moveDirection.x > 0) spriteRenderer.flipX = false;
         }
 
         public void MoveTo(Vector2 targetPosition)

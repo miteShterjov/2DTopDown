@@ -55,6 +55,7 @@ namespace TopDown.Player
             StartCoroutine(InvincibleCooldownRoutine());
             knockback.GetKnockbacked(damageSource.gameObject.transform);
             flash.TriggerFlash();
+            ScreenShaker.Instance.ShakeScreen();
             
         }
 

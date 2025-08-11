@@ -33,9 +33,14 @@ namespace TopDown.Weapons
             this.projectileRange = projectileRange;
         }
 
+        public void UpdateMoveSpeed(float moveSpeed)
+        {
+            this.speed = moveSpeed;
+        }
+
         private void MovePojectile()
         {
-            Vector3 moveVector = isEnemyProjectile ? Vector3.right : Vector3.left; 
+            Vector3 moveVector = isEnemyProjectile ? Vector3.right : Vector3.left;
             transform.Translate(moveVector * speed * Time.deltaTime);
         }
 
