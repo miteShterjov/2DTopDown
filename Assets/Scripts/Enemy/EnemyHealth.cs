@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using TopDown.Misc;
+using TopDown.PickUps;
 using UnityEngine;
 
 namespace TopDown.Enemy
@@ -52,6 +53,7 @@ namespace TopDown.Enemy
             ParticleSystem deathVFXInstance = Instantiate(deathVFX, transform.position, Quaternion.identity);
             deathVFXInstance.transform.SetParent(this.transform);
             spriteRenderer.color = Color.clear; // Make the sprite invisible
+            GetComponent<PickUpSpawner>().DropLoot();
             Destroy(gameObject, dieDelay);
         }
     }

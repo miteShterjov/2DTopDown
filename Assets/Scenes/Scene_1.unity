@@ -70194,6 +70194,22 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 988793262390433016, guid: 1897ef39b9e01e242b780df3a412fb48, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -2.1788998
+      objectReference: {fileID: 0}
+    - target: {fileID: 988793262390433016, guid: 1897ef39b9e01e242b780df3a412fb48, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 8.19082
+      objectReference: {fileID: 0}
+    - target: {fileID: 1629603066257394180, guid: 1897ef39b9e01e242b780df3a412fb48, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -2.1788998
+      objectReference: {fileID: 0}
+    - target: {fileID: 1629603066257394180, guid: 1897ef39b9e01e242b780df3a412fb48, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 8.19082
+      objectReference: {fileID: 0}
     - target: {fileID: 2347402488997498482, guid: 1897ef39b9e01e242b780df3a412fb48, type: 3}
       propertyPath: Target.TrackingTarget
       value: 
@@ -70237,6 +70253,14 @@ PrefabInstance:
     - target: {fileID: 5282759780703060943, guid: 1897ef39b9e01e242b780df3a412fb48, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6333773231516368474, guid: 1897ef39b9e01e242b780df3a412fb48, type: 3}
+      propertyPath: m_Offset.x
+      value: 11
+      objectReference: {fileID: 0}
+    - target: {fileID: 6333773231516368474, guid: 1897ef39b9e01e242b780df3a412fb48, type: 3}
+      propertyPath: m_Offset.y
+      value: -9
       objectReference: {fileID: 0}
     - target: {fileID: 6544251336949630382, guid: 1897ef39b9e01e242b780df3a412fb48, type: 3}
       propertyPath: m_Name

@@ -1,4 +1,5 @@
 using TopDown.Damage;
+using TopDown.PickUps;
 using TopDown.Weapons;
 using UnityEngine;
 
@@ -15,6 +16,7 @@ namespace TopDown.Misc
         {
             if (other.gameObject.GetComponent<DamageSource>() || other.gameObject.GetComponent<Projectile>())
             {
+                GetComponent<PickUpSpawner>()?.DropLoot();
                 deathVFX = Instantiate(destroyVFX, transform.position, Quaternion.identity);
                 deathVFX.transform.SetParent(this.transform);
                 GetComponent<SpriteRenderer>().color = Color.clear; // Make the sprite invisible

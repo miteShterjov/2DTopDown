@@ -107,6 +107,7 @@ GameObject:
   - component: {fileID: 1178185104394647586}
   - component: {fileID: 8942060904857311049}
   - component: {fileID: 5756415378511256831}
+  - component: {fileID: 1474941039566485695}
   m_Layer: 0
   m_Name: EnemyGrape
   m_TagString: Enemy
@@ -369,3 +370,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   grapePrefab: {fileID: 1251438635560806921, guid: 198560384e555564a81c7ffd326a86da, type: 3}
+--- !u!114 &1474941039566485695
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3774715916749488046}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2dcd5e9055a1c174ca79bb43bb801e27, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pickUps:
+  - {fileID: 2971045328119158695, guid: 22ff1c02ad1e0ad48a86f54747006bc6, type: 3}
+  - {fileID: 5332965095372009475, guid: 7c4b68f931bd0134f948aedcf46f3c50, type: 3}
+  - {fileID: 7493284057427116052, guid: e253b8c58f7ee8041bcf5db830d4ef8b, type: 3}

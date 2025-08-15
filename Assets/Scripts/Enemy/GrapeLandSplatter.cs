@@ -7,6 +7,7 @@ namespace TopDown.Enemy
     public class GrapeLandSplatter : MonoBehaviour
     {
         [SerializeField] private float colliderDelay = 0.4f;
+        [SerializeField] private int damageAmmount = 1;
         private SpriteFade spriteFade;
 
         private void Awake()
@@ -22,8 +23,12 @@ namespace TopDown.Enemy
 
         void OnTriggerEnter2D(Collider2D collision)
         {
-            PlayerHealthController playerHealth = collision.gameObject.GetComponent<PlayerHealthController>();
-            playerHealth?.TakeDamage(1, transform);
+            if (collision.gameObject.GetComponent<PlayerHealthController>())
+            {
+                PlayerHealthController playerHealth = collision.gameObject.GetComponent<PlayerHealthController>();
+                playerHealth?.TakeDamage(damageAmmount, transform);
+            }
+
         }
 
         private void DisableCollider()

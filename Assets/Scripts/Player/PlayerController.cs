@@ -75,6 +75,8 @@ namespace TopDown.Player
         private void Dash()
         {
             if (isDashing) return; // Prevent dashing if already dashing
+            if (Stamina.Instance.CurrentStamina <= 0) return;
+            Stamina.Instance.UseStamina();
             isDashing = true;
             moveSpeed *= dashSpeed;
             dashTrail.emitting = true;

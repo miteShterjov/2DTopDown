@@ -305,6 +305,7 @@ GameObject:
   - component: {fileID: 4425783689318142572}
   - component: {fileID: 1136282824138401122}
   - component: {fileID: 3529010754975326484}
+  - component: {fileID: 2357776888196197516}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -446,8 +447,8 @@ CapsuleCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: -0.01826982, y: -0.33799145}
-  m_Size: {x: 0.8721125, y: 0.3240191}
+  m_Offset: {x: -0.009805603, y: -0.34645477}
+  m_Size: {x: 1.0244594, y: 0.4763661}
   m_Direction: 1
 --- !u!95 &7157312420773228249
 Animator:
@@ -556,6 +557,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   flashDuration: 0.1
   flashMaterial: {fileID: 2100000, guid: 1b0468d9fdc812c419f10e0867358c5e, type: 2}
+--- !u!114 &2357776888196197516
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8726706696105409713}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 94cde27e67e96174cb7fc904ab524ea6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fullStaminaImage: {fileID: 21300000, guid: 8a0ddf232c65503438555050324aecdc, type: 3}
+  emptyStaminaImage: {fileID: 21300000, guid: 6a829c4625f576145957743e9b4a7115, type: 3}
+  staminaRefreshRate: 3
 --- !u!1 &9106351572266067594
 GameObject:
   m_ObjectHideFlags: 0

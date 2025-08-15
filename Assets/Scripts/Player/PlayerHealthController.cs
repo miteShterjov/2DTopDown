@@ -2,16 +2,21 @@ using System;
 using System.Collections;
 using TopDown.Enemy;
 using TopDown.Misc;
+using TopDown.SceneManagment;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace TopDown.Player
 {
-    public class PlayerHealthController : MonoBehaviour
+    public class PlayerHealthController : Singleton<PlayerHealthController>
     {
         [SerializeField] private int maxHealth = 10;
         [SerializeField] private float invincibleCooldown = 0.8f;
         [Range(0, 1)][SerializeField] private float alphaAmount = 0.6f;
 
+        const string HEALTH_SLIDER_NAME = "HealthSlider";
+
+        private Slider healthSlider;
         private Knockback knockback;
         private Flash flash;
         private SpriteRenderer spriteRenderer;
@@ -19,8 +24,9 @@ namespace TopDown.Player
         private int currentHealth;
         private bool canTakeDamage = true;
 
-        void Awake()
+        protected override void Awake()
         {
+            base.Awake();
             spriteRenderer = GetComponent<SpriteRenderer>();
             knockback = GetComponent<Knockback>();
             flash = GetComponent<Flash>();
@@ -29,13 +35,30 @@ namespace TopDown.Player
         void Start()
         {
             currentHealth = maxHealth;
+            UpdateHealthSlider();
         }
 
         public void TakeDamage(int damageAmmount, Transform enemy)
         {
             currentHealth -= damageAmmount;
             DoPlayerTakeDamageSequence(enemy);
+            UpdateHealthSlider();
 
+            if (currentHealth <= 0) PlayerDies();
+        }
+
+        private void PlayerDies()
+        {
+            currentHealth = 0;
+            print("Player has died.");
+            PlayerController.Instance.gameObject.SetActive(false);
+        }
+
+        public void HealPlayer(int healAmmount)
+        {
+            if (currentHealth >= maxHealth) return;
+            currentHealth += healAmmount;
+            UpdateHealthSlider();
         }
 
         private void OnCollisionStay2D(Collision2D collision)
@@ -56,7 +79,7 @@ namespace TopDown.Player
             knockback.GetKnockbacked(damageSource.gameObject.transform);
             flash.TriggerFlash();
             ScreenShaker.Instance.ShakeScreen();
-            
+
         }
 
         private void SetAlphaInColor(float value)
@@ -71,6 +94,14 @@ namespace TopDown.Player
             yield return new WaitForSeconds(invincibleCooldown);
             SetAlphaInColor(1);
             canTakeDamage = true;
+        }
+
+        private void UpdateHealthSlider()
+        {
+            if (healthSlider == null) healthSlider = GameObject.Find(HEALTH_SLIDER_NAME).GetComponent<Slider>();
+
+            healthSlider.maxValue = maxHealth;
+            healthSlider.value = currentHealth;
         }
 
     }
