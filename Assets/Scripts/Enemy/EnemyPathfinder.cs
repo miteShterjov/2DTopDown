@@ -20,14 +20,29 @@ namespace TopDown.Enemy
         private void FixedUpdate()
         {
             if (GetComponent<Knockback>().IsKnockbacked) return;
+            if (GetComponent<Slime>() != null && GetComponent<Slime>().IsAttacking) return;
 
-            rb.MovePosition(rb.position + moveDirection * (moveSpeed * Time.fixedDeltaTime));
+            EnemyMove();
 
             if (moveDirection.x < 0) spriteRenderer.flipX = true;
-            else if(moveDirection.x > 0) spriteRenderer.flipX = false;
+            else if (moveDirection.x > 0) spriteRenderer.flipX = false;
         }
 
-        public void MoveTo(Vector2 targetPosition)
+        private void EnemyMove()
+        {
+            rb.MovePosition(rb.position + moveDirection * (moveSpeed * Time.fixedDeltaTime));
+        }
+
+        public void MoveTowardsPlayer(Vector3 position)
+        {
+            // Get the direction from enemy to player
+            Vector2 direction = (position - transform.position).normalized;
+
+            // Move enemy towards player
+            transform.position += (Vector3)direction * moveSpeed * Time.deltaTime;
+        }
+
+        public void GetMoveDirection(Vector2 targetPosition)
         {
             moveDirection = (targetPosition - rb.position).normalized;
         }

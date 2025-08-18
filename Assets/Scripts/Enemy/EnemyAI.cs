@@ -6,7 +6,7 @@ namespace TopDown.Enemy
 {
     public class EnemyAI : MonoBehaviour
     {
-        [SerializeField] private float roamChangeDirFloat;
+        [SerializeField] private float roamChangeDirectionCounter; //
         [SerializeField] private float attackRange = 0f;
         [SerializeField] private float attackCooldown = 1f;
         [SerializeField] private MonoBehaviour enemyType;
@@ -47,22 +47,25 @@ namespace TopDown.Enemy
                 default:
                 case State.Roaming:
                     Roaming();
+                    print("State is Roaming.");
                     break;
 
                 case State.Attacking:
                     Attacking();
+                    print("State is Attacking!");
                     break;
             }
         }
 
         private void Roaming()
         {
+            if (GetComponent<Slime>()) GetComponent<Slime>().IsAttacking = false;
             timeRoaming += Time.deltaTime;
-            enemyPathfinding.MoveTo(roamPosition);
+            enemyPathfinding.GetMoveDirection(roamPosition);
 
             if (AggroCheck()) state = State.Attacking;
 
-            if (timeRoaming > roamChangeDirFloat) roamPosition = GetRoamingPosition();
+            if (timeRoaming > roamChangeDirectionCounter) roamPosition = GetRoamingPosition();
 
         }
 
@@ -70,11 +73,12 @@ namespace TopDown.Enemy
         {
             if (!canAttack && attackRange == 0) return;
             if (!AggroCheck()) state = State.Roaming;
+            if (GetComponent<Slime>()) GetComponent<Slime>().IsAttacking = true;
             (enemyType as IEnemy).Attack();
             canAttack = false;
 
             if (stopMovingWhileAttacking) enemyPathfinding.StopMoving();
-            else enemyPathfinding.MoveTo(roamPosition);
+            else enemyPathfinding.GetMoveDirection(roamPosition);
 
             StartCoroutine(AttackCooldownRoutine());
         }
@@ -88,7 +92,7 @@ namespace TopDown.Enemy
         private Vector2 GetRoamingPosition()
         {
             timeRoaming = 0;
-            return new Vector2(Random.Range(-1f, 1f), Random.Range(-1f, 1f)).normalized;
+            return new Vector2(Random.Range(-2f, 2f), Random.Range(-2f, 2f)).normalized;
         }
 
         private bool AggroCheck()
@@ -96,5 +100,9 @@ namespace TopDown.Enemy
             return Vector2.Distance(transform.position, PlayerController.Instance.transform.position) < attackRange;
         }
 
+        private void OnDrawGizmos()
+        {
+            Gizmos.DrawWireSphere(transform.position, attackRange);
+        }
     }
 }

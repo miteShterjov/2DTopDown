@@ -13,9 +13,13 @@ namespace TopDown.Enemy
         [SerializeField] private ParticleSystem deathVFX;
 
         private int currentHealth;
+        private bool isDead = false;
 
         private Knockback knockback;
         private SpriteRenderer spriteRenderer;
+
+        public bool IsDead { get => isDead; set => isDead = value; }
+        public int MaxHealth { get => maxHealth; set => maxHealth = value; }
 
         void Awake()
         {
@@ -26,6 +30,11 @@ namespace TopDown.Enemy
         void Start()
         {
             currentHealth = maxHealth;
+        }
+
+        void Update()
+        {
+            if (currentHealth <= 0) isDead = true;
         }
 
         public void TakeDamage(int damage)
