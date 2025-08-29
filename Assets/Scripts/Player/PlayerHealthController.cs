@@ -24,6 +24,8 @@ namespace TopDown.Player
         private int currentHealth;
         private bool canTakeDamage = true;
 
+        public int MaxHealth { get => maxHealth; set => maxHealth = value; }
+
         protected override void Awake()
         {
             base.Awake();
@@ -47,18 +49,23 @@ namespace TopDown.Player
             if (currentHealth <= 0) PlayerDies();
         }
 
-        private void PlayerDies()
-        {
-            currentHealth = 0;
-            print("Player has died.");
-            PlayerController.Instance.gameObject.SetActive(false);
-        }
+        public void SetPlayerHealthToMax() => currentHealth = maxHealth;
+
+        private void PlayerDies() => StartCoroutine(SpawnManager.Instance.StartPlayerSpawnSequence());
+
 
         public void HealPlayer(int healAmmount)
         {
             if (currentHealth >= maxHealth) return;
             currentHealth += healAmmount;
             UpdateHealthSlider();
+        }
+
+        public void RestorePlayerAfterDeath()
+        {
+            currentHealth = maxHealth;
+            UpdateHealthSlider();
+            Stamina.Instance.RefreshStamina();
         }
 
         private void OnCollisionStay2D(Collision2D collision)
@@ -103,6 +110,5 @@ namespace TopDown.Player
             healthSlider.maxValue = maxHealth;
             healthSlider.value = currentHealth;
         }
-
     }
 }

@@ -20,13 +20,19 @@ namespace TopDown.Player
         private Vector2 movementInput;
         private Rigidbody2D rb;
         private bool isFacingLeft;
+        private float defaultMoveSpeed;
 
         private float dashDuration = .2f;
         private bool isDashing = false;
+        private bool canAttack = true;
+        private bool canMove = true;
+
 
 
         public Vector2 MovementInput { get => movementInput; set => movementInput = value; }
         public bool IsFacingLeft { get => isFacingLeft; set => isFacingLeft = value; }
+        public bool CanAttack { get => canAttack; set => canAttack = value; }
+        public bool CanMove { get => canMove; set => canMove = value; }
 
         protected override void Awake()
         {
@@ -40,11 +46,13 @@ namespace TopDown.Player
         {
             inputActions.Player.Dash.performed += ctx => Dash();
             dashTrail.emitting = false;
+            defaultMoveSpeed = moveSpeed;
         }
 
         void Update()
         {
             MovementInput = inputActions.Player.Move.ReadValue<Vector2>();
+            if (canAttack) moveSpeed = defaultMoveSpeed;
         }
 
         void FixedUpdate()
@@ -90,6 +98,11 @@ namespace TopDown.Player
             dashTrail.emitting = false;
             yield return new WaitForSeconds(dashCooldown);
             isDashing = false; // Reset dashing state after cooldown
+        }
+
+        internal void DialogueStopMove()
+        {
+            if (!canAttack) moveSpeed = 0; 
         }
     }
 }

@@ -43,5 +43,16 @@ namespace TopDown.SceneManagment
             }
 
         }
+
+        public IEnumerator FadeToBlackAndWait()
+        {
+            if (fadeRoutine != null)
+            {
+                StopCoroutine(fadeRoutine);
+            }
+
+            fadeRoutine = FadeRoutine(1);
+            yield return StartCoroutine(fadeRoutine);
+        }
     }
 }

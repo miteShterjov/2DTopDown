@@ -25,6 +25,7 @@ namespace TopDown.Enemy
         {
             if (collision.gameObject.GetComponent<PlayerHealthController>())
             {
+                print("player detected!");
                 PlayerHealthController playerHealth = collision.gameObject.GetComponent<PlayerHealthController>();
                 playerHealth?.TakeDamage(damageAmmount, transform);
             }

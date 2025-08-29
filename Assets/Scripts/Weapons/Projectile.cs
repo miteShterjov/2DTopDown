@@ -11,7 +11,6 @@ namespace TopDown.Weapons
         [SerializeField] private float speed = 10f;
         [SerializeField] private float lifetime = 5f;
         [SerializeField] private GameObject hitEffectPrefab;
-        [SerializeField] private float destroyDelay = 0.8f;
         [SerializeField] private bool isEnemyProjectile = false;
         [SerializeField] private float projectileRange = 10f;
         private Vector3 startPosition;

@@ -55,6 +55,8 @@ SpriteRenderer:
   m_RayTracingAccelStructBuildFlagsOverride: 0
   m_RayTracingAccelStructBuildFlags: 1
   m_SmallMeshCulling: 1
+  m_ForceMeshLod: -1
+  m_MeshLodSelectionBias: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -76,6 +78,7 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
+  m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
@@ -124,8 +127,8 @@ CapsuleCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 0.03446853, y: -0.04431651}
-  m_Size: {x: 1.1095573, y: 0.38000816}
+  m_Offset: {x: 0.048778288, y: -0.10441817}
+  m_Size: {x: 1.4701678, y: 0.7062781}
   m_Direction: 1
 --- !u!114 &2548511932863788893
 MonoBehaviour:
@@ -153,3 +156,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   colliderDelay: 0.6
+  damageAmmount: 1

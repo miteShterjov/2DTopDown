@@ -6,6 +6,8 @@ namespace TopDown.Enemy
 {
     public class EnemyAI : MonoBehaviour
     {
+        public bool IsPaused { get => isPaused; set => isPaused = value; }
+        
         [SerializeField] private float roamChangeDirectionCounter; //
         [SerializeField] private float attackRange = 0f;
         [SerializeField] private float attackCooldown = 1f;
@@ -16,13 +18,14 @@ namespace TopDown.Enemy
         private enum State
         {
             Roaming,
-            Attacking
+            Attacking,
+            Paused
         }
-
         private State state;
         private EnemyPathfinder enemyPathfinding;
         private Vector2 roamPosition;
         private float timeRoaming = 0f;
+        private bool isPaused;
 
         private void Awake()
         {
@@ -37,6 +40,7 @@ namespace TopDown.Enemy
 
         void Update()
         {
+            if (isPaused) state = State.Paused;
             MovementStateControl();
         }
 
@@ -47,12 +51,17 @@ namespace TopDown.Enemy
                 default:
                 case State.Roaming:
                     Roaming();
-                    print("State is Roaming.");
+                    print(gameObject + ":State is Roaming.");
                     break;
 
                 case State.Attacking:
                     Attacking();
-                    print("State is Attacking!");
+                    print(gameObject + ": State is Attacking!");
+                    break;
+
+                case State.Paused:
+                    GameIsPaused();
+                    print("Game is currently paused!");
                     break;
             }
         }
@@ -66,7 +75,6 @@ namespace TopDown.Enemy
             if (AggroCheck()) state = State.Attacking;
 
             if (timeRoaming > roamChangeDirectionCounter) roamPosition = GetRoamingPosition();
-
         }
 
         private void Attacking()
@@ -81,6 +89,12 @@ namespace TopDown.Enemy
             else enemyPathfinding.GetMoveDirection(roamPosition);
 
             StartCoroutine(AttackCooldownRoutine());
+        }
+
+        private void GameIsPaused()
+        {
+            enemyPathfinding.StopMoving();
+            if (!isPaused) state = State.Roaming;
         }
 
         private IEnumerator AttackCooldownRoutine()
@@ -102,7 +116,7 @@ namespace TopDown.Enemy
 
         private void OnDrawGizmos()
         {
-            Gizmos.DrawWireSphere(transform.position, attackRange);
+            // Gizmos.DrawWireSphere(transform.position, attackRange);
         }
     }
 }
