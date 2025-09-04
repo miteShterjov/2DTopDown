@@ -52,6 +52,8 @@ SpriteRenderer:
   m_RayTracingAccelStructBuildFlagsOverride: 0
   m_RayTracingAccelStructBuildFlags: 1
   m_SmallMeshCulling: 1
+  m_ForceMeshLod: -1
+  m_MeshLodSelectionBias: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -73,6 +75,7 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
+  m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
@@ -151,6 +154,8 @@ SpriteRenderer:
   m_RayTracingAccelStructBuildFlagsOverride: 0
   m_RayTracingAccelStructBuildFlags: 1
   m_SmallMeshCulling: 1
+  m_ForceMeshLod: -1
+  m_MeshLodSelectionBias: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -172,6 +177,7 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
+  m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
@@ -286,6 +292,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   damage: 1
   numberOfSapwns: 3
+  spawnsMaxHP: 3
   slimePrefab: {fileID: 8372699815187428109}
   originalMaterial: {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
 --- !u!114 &1388398315764320376
@@ -305,6 +312,8 @@ MonoBehaviour:
   attackCooldown: 1
   enemyType: {fileID: 8406047256292406515}
   stopMovingWhileAttacking: 0
+  waitBeforeNextMove: 1.5
+  roamingSpeed: 2
 --- !u!114 &8478702589075794521
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -330,9 +339,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 489b8341b00ee3040972fab16c7c464c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 2
+  maxHealth: 4
   dieDelay: 0.5
   deathVFX: {fileID: 2487327354532175441, guid: 3118fc179cce5eb48affd4e16b9de483, type: 3}
+  currentHealth: 0
+  healthBarPrefab: {fileID: 1373281395900331734, guid: 5a104587bc26be94a84b5c18ef3bef84, type: 3}
 --- !u!114 &705728211850965889
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -22,13 +22,13 @@ namespace TopDown.Enemy
             if (GetComponent<Knockback>().IsKnockbacked) return;
             if (GetComponent<Slime>() != null && GetComponent<Slime>().IsAttacking) return;
 
-            EnemyMove();
+            EnemyMove(moveDirection);
 
             if (moveDirection.x < 0) spriteRenderer.flipX = true;
             else if (moveDirection.x > 0) spriteRenderer.flipX = false;
         }
 
-        private void EnemyMove()
+        public void EnemyMove(Vector2 moveDirection)
         {
             rb.MovePosition(rb.position + moveDirection * (moveSpeed * Time.fixedDeltaTime));
         }

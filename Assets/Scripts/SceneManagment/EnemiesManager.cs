@@ -11,8 +11,6 @@ namespace TopDown.SceneManagment
         private void Start()
         {
             enemies = FindObjectsByType<EnemyAI>(FindObjectsSortMode.None);
-            if (enemies == null) Debug.Log("Enemies array in EnemiesManager empty or none in scene.");
-            else print("enemy list is full");
         }
 
         void Update()

@@ -17,11 +17,7 @@ namespace TopDown.Damage
             if (collision.CompareTag("Enemy"))
             {
                 Enemy.EnemyHealth enemyHealth = collision.GetComponent<Enemy.EnemyHealth>();
-                if (enemyHealth != null)
-                {
-                    enemyHealth.TakeDamage(damageAmount);
-                    Debug.Log($"Enemy took {damageAmount} damage from {gameObject.name}");
-                }
+                if (enemyHealth != null) enemyHealth.TakeDamage(damageAmount);
             }
         }
     }

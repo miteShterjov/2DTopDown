@@ -9,30 +9,26 @@ namespace TopDown.Player
 {
     public class PlayerController : Singleton<PlayerController>
     {
+        public Vector2 MovementInput { get => movementInput; set => movementInput = value; }
+        public bool IsFacingLeft { get => isFacingLeft; set => isFacingLeft = value; }
+        public bool CanAttack { get => canAttack; set => canAttack = value; }
+        public bool CanMove { get => canMove; set => canMove = value; }
+
         [SerializeField] private float moveSpeed = 5f;
-        [SerializeField] private float dashSpeed = 2f;
+        [SerializeField] private float dashSpeed = 20f;
         [SerializeField] private float dashCooldown = 0.75f;
         [SerializeField] private TrailRenderer dashTrail;
         [SerializeField] private Transform weaponCollider;
         [SerializeField] private Transform slashAnimSpawner;
-
         private InputSystem_Actions inputActions;
         private Vector2 movementInput;
         private Rigidbody2D rb;
         private bool isFacingLeft;
         private float defaultMoveSpeed;
-
         private float dashDuration = .2f;
         private bool isDashing = false;
         private bool canAttack = true;
         private bool canMove = true;
-
-
-
-        public Vector2 MovementInput { get => movementInput; set => movementInput = value; }
-        public bool IsFacingLeft { get => isFacingLeft; set => isFacingLeft = value; }
-        public bool CanAttack { get => canAttack; set => canAttack = value; }
-        public bool CanMove { get => canMove; set => canMove = value; }
 
         protected override void Awake()
         {
@@ -63,13 +59,6 @@ namespace TopDown.Player
         public Transform GetWeaponCollider() { return weaponCollider; }
         public Transform GetSlashAnimSpawner() { return slashAnimSpawner; }
 
-
-        private void PlayerMovement()
-        {
-            if (GetComponent<Knockback>().IsKnockbacked) return;
-            rb.MovePosition(rb.position + MovementInput * moveSpeed * Time.fixedDeltaTime);
-        }
-
         public void OnEnable()
         {
             inputActions.Enable();
@@ -80,12 +69,19 @@ namespace TopDown.Player
             inputActions.Disable();
         }
 
+        private void PlayerMovement()
+        {
+            if (GetComponent<Knockback>().IsKnockbacked) return;
+            rb.MovePosition(rb.position + MovementInput * moveSpeed * Time.fixedDeltaTime);
+        }
+
         private void Dash()
         {
             if (isDashing) return; // Prevent dashing if already dashing
             if (Stamina.Instance.CurrentStamina <= 0) return;
             Stamina.Instance.UseStamina();
             isDashing = true;
+            canAttack = false;
             moveSpeed *= dashSpeed;
             dashTrail.emitting = true;
             StartCoroutine(EndDashRoustine());
@@ -96,6 +92,7 @@ namespace TopDown.Player
             yield return new WaitForSeconds(dashDuration);
             moveSpeed /= dashSpeed;
             dashTrail.emitting = false;
+            canAttack = true;
             yield return new WaitForSeconds(dashCooldown);
             isDashing = false; // Reset dashing state after cooldown
         }

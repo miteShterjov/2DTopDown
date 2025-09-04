@@ -1,5 +1,6 @@
 using System;
 using TopDown.Player;
+using TopDown.SceneManagment;
 using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -30,6 +31,7 @@ namespace TopDown.Weapons
         public void Attack()
         {
             animator.SetTrigger(FIRE_HASH);
+            AudioManager.Instance.PlayPlayerAttackSFX("Staff");
         }
 
         public void SpawnStaffProjectileAnimEvent()

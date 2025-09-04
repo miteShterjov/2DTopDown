@@ -52,6 +52,8 @@ SpriteRenderer:
   m_RayTracingAccelStructBuildFlagsOverride: 0
   m_RayTracingAccelStructBuildFlags: 1
   m_SmallMeshCulling: 1
+  m_ForceMeshLod: -1
+  m_MeshLodSelectionBias: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -73,6 +75,7 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
+  m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
@@ -151,6 +154,8 @@ SpriteRenderer:
   m_RayTracingAccelStructBuildFlagsOverride: 0
   m_RayTracingAccelStructBuildFlags: 1
   m_SmallMeshCulling: 1
+  m_ForceMeshLod: -1
+  m_MeshLodSelectionBias: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -172,10 +177,11 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
+  m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: -6167974524812214683, guid: d688e6d7e10b3cd4e8f6d1411641403a, type: 3}
+  m_Sprite: {fileID: 616444264568852485, guid: 0f12542a968bb8c4e83d25aa8088110e, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -223,7 +229,7 @@ Animator:
   m_GameObject: {fileID: 8372699815187428109}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 18bfa76da0979b74b958fd2d51ea5918, type: 2}
+  m_Controller: {fileID: 22100000, guid: 4f08a955628714f4d9e4cf40ee118b3e, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -286,6 +292,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   damage: 1
   numberOfSapwns: 3
+  spawnsMaxHP: 2
   slimePrefab: {fileID: 8372699815187428109}
   originalMaterial: {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
 --- !u!114 &1388398315764320376
@@ -300,11 +307,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4f727abb734c87042b075be084ff7292, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  roamChangeDirectionCounter: 2
+  roamChangeDirectionCounter: 4
   attackRange: 5
   attackCooldown: 1
   enemyType: {fileID: 8406047256292406515}
   stopMovingWhileAttacking: 0
+  waitBeforeNextMove: 1.5
+  roamingSpeed: 2
 --- !u!114 &8478702589075794521
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -333,6 +342,8 @@ MonoBehaviour:
   maxHealth: 2
   dieDelay: 0.5
   deathVFX: {fileID: 2487327354532175441, guid: 3118fc179cce5eb48affd4e16b9de483, type: 3}
+  currentHealth: 0
+  healthBarPrefab: {fileID: 1373281395900331734, guid: 5a104587bc26be94a84b5c18ef3bef84, type: 3}
 --- !u!114 &705728211850965889
 MonoBehaviour:
   m_ObjectHideFlags: 0

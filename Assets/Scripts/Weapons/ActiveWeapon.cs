@@ -33,7 +33,8 @@ namespace TopDown.Weapons
 
         private void Attack()
         {
-            if (isAttacking && CurrentActiveWeapon as IWeapon == null) return;
+            if (isAttacking) return;
+            if (CurrentActiveWeapon as IWeapon == null) return;
 
             (CurrentActiveWeapon as IWeapon)?.Attack();
             isAttacking = true;

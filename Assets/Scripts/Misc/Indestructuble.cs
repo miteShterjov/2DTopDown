@@ -1,16 +1,9 @@
 using UnityEngine;
 
-public class Indestructuble : MonoBehaviour
+namespace TopDown.Misc
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    public class Indestructuble : MonoBehaviour
     {
-        
-    }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 }

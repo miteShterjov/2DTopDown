@@ -29,6 +29,7 @@ namespace TopDown.Dialogue
                     justStarted = true;
                     PlayerController.Instance.CanMove = true;
                     PlayerController.Instance.CanAttack = true;
+                    EnemiesManager.Instance.ResumeAllEnemies();
                 }
                 else
                 {
@@ -53,6 +54,8 @@ namespace TopDown.Dialogue
             dialogueBox.SetActive(true);
             nameBox.SetActive(isPerson);
             PlayerController.Instance.CanMove = false;
+            EnemiesManager.Instance.PauseAllEnemies();
+            PlayerController.Instance.CanAttack = false;
             ContinueDialogue();
         }
 

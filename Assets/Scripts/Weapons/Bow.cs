@@ -1,3 +1,4 @@
+using TopDown.SceneManagment;
 using UnityEngine;
 
 namespace TopDown.Weapons
@@ -23,6 +24,7 @@ namespace TopDown.Weapons
             arrow.transform.localScale = new Vector3(-1f * arrow.transform.localScale.x,
                                          arrow.transform.localScale.y,
                                          arrow.transform.localScale.z);
+            AudioManager.Instance.PlayPlayerAttackSFX("Bow");
             arrow.GetComponent<Projectile>().UpdateProjectileRange(weaponInfo.weaponRange);
         }
 

@@ -50,10 +50,7 @@ namespace TopDown.Player
             animator.SetFloat("lookY", snappedDIrection.y);
         }
 
-        private void UpdateAnimator()
-        {
-            animator.SetBool("isMoving", movementInput.magnitude > 0.1f);
-        }
+        private void UpdateAnimator() => animator.SetBool("isMoving", movementInput.magnitude > 0.1f);
 
         private Vector2 SnapDIrection(Vector2 direction)
         {

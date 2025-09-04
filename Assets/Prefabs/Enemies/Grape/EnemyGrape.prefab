@@ -52,6 +52,8 @@ SpriteRenderer:
   m_RayTracingAccelStructBuildFlagsOverride: 0
   m_RayTracingAccelStructBuildFlags: 1
   m_SmallMeshCulling: 1
+  m_ForceMeshLod: -1
+  m_MeshLodSelectionBias: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -73,6 +75,7 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
+  m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: -1
@@ -151,6 +154,8 @@ SpriteRenderer:
   m_RayTracingAccelStructBuildFlagsOverride: 0
   m_RayTracingAccelStructBuildFlags: 1
   m_SmallMeshCulling: 1
+  m_ForceMeshLod: -1
+  m_MeshLodSelectionBias: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -172,6 +177,7 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
+  m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
@@ -284,11 +290,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4f727abb734c87042b075be084ff7292, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  roamChangeDirFloat: 0
+  roamChangeDirectionCounter: 4
   attackRange: 5
   attackCooldown: 1
   enemyType: {fileID: 5756415378511256831}
   stopMovingWhileAttacking: 1
+  waitBeforeNextMove: 1.5
+  roamingSpeed: 2
 --- !u!114 &4793198024780088889
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -314,9 +322,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 489b8341b00ee3040972fab16c7c464c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 2
+  maxHealth: 8
   dieDelay: 0.5
   deathVFX: {fileID: 2487327354532175441, guid: 732c7af96d909a2489f2d4af7e35348e, type: 3}
+  currentHealth: 0
+  healthBarPrefab: {fileID: 1373281395900331734, guid: 5a104587bc26be94a84b5c18ef3bef84, type: 3}
 --- !u!114 &4783286665029504347
 MonoBehaviour:
   m_ObjectHideFlags: 0

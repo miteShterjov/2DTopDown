@@ -1,5 +1,6 @@
 using System;
 using TopDown.Player;
+using TopDown.SceneManagment;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -46,7 +47,8 @@ namespace TopDown.Weapons
             weaponColider.gameObject.SetActive(true);
             slashVFX = Instantiate(slashAnimPrefab, slashAnimSpawner.position, slashAnimSpawner.rotation);
             slashVFX.transform.parent = this.transform.parent;
-            print("Attack performed with sword!");
+            AudioManager.Instance.PlayPlayerAttackSFX("Sword");
+            // print("Attack performed with sword!");
         }
 
         public void DoneAttackingAnimEvent()

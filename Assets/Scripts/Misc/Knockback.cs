@@ -5,12 +5,12 @@ namespace TopDown.Misc
 {
     public class Knockback : MonoBehaviour
     {
+        public bool IsKnockbacked { get => isKnockbacked; set => isKnockbacked = value; }
+
         [SerializeField] private float knockbackForce = 5f;
         [SerializeField] private float knockbackDuration = 0.5f;
         private Rigidbody2D rb;
         private bool isKnockbacked;
-
-        public bool IsKnockbacked { get => isKnockbacked; set => isKnockbacked = value; }
 
         void Awake()
         {
@@ -32,7 +32,5 @@ namespace TopDown.Misc
             rb.linearVelocity = Vector2.zero; // Stop any movement after knockback
             IsKnockbacked = false;
         }
-
-
     }
 }

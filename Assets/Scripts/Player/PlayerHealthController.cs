@@ -81,6 +81,7 @@ namespace TopDown.Player
         private void DoPlayerTakeDamageSequence(Transform damageSource)
         {
             canTakeDamage = false;
+            AudioManager.Instance.PlayPlayerHurtSFX();
             SetAlphaInColor(alphaAmount);
             StartCoroutine(InvincibleCooldownRoutine());
             knockback.GetKnockbacked(damageSource.gameObject.transform);

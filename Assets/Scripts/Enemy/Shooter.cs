@@ -19,6 +19,7 @@ namespace TopDown.Enemy
         [SerializeField] private bool stagger;
         [Tooltip("Shoot bullets like ping pong balls back and forth between bursts.")]
         [SerializeField] private bool oscillate;
+        [SerializeField] private GameObject spawnPrefab;
 
         private bool isShooting = false;
 
@@ -33,6 +34,51 @@ namespace TopDown.Enemy
             if (startingDistance < 0.1f) { startingDistance = 0.1f; }
             if (angleSpread == 0) { projectilesPerBurst = 1; }
             if (bulletMoveSpeed <= 0) { bulletMoveSpeed = 0.1f; }
+        }
+
+        public void BasicConeAttack()
+        {
+            bulletMoveSpeed = 8f;
+            burstCount = 3;
+            projectilesPerBurst = 3;
+            angleSpread = 60;
+            restTime = 3f;
+            timeBetweenBursts = 0.75f;
+            oscillate = false;
+            Attack();
+        }
+
+        public void BasicSprayAttack()
+        {
+            bulletMoveSpeed = 6f;
+            burstCount = 5;
+            projectilesPerBurst = 5;
+            angleSpread = 90;
+            restTime = 2f;
+            timeBetweenBursts = 0.5f;
+            oscillate = true;
+            Attack();
+        }
+
+        public void SummonGhostAttack()
+        {
+            int spawnAmmount = Random.Range(2, 5);
+            for (int i = 0; i < spawnAmmount; i++)
+            {
+                Vector2 spawnPos = (Vector2)transform.position + Random.insideUnitCircle * 2f;
+                Instantiate(spawnPrefab, spawnPos, Quaternion.identity);
+            }
+        }
+
+        public void UltimateAttack()
+        {
+            bulletMoveSpeed = 8;
+            burstCount = 4;
+            projectilesPerBurst = 16;
+            angleSpread = 359;
+            timeBetweenBursts = 0.8f;
+            oscillate = false;
+            Attack();
         }
 
 

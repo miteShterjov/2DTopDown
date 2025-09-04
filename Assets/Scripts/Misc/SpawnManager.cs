@@ -23,7 +23,7 @@ namespace TopDown.Misc
                 spawnPoint.OnSpawnPointActivated += SpawnPoint_OnSpawnPointActivated;
             }
 
-            print("SpawnManager subscribed to all SpawnPoints completed!");
+            // print("SpawnManager subscribed to all SpawnPoints completed!");
         }
 
         private void OnDisable()
@@ -33,7 +33,7 @@ namespace TopDown.Misc
                 spawnPoint.OnSpawnPointActivated -= SpawnPoint_OnSpawnPointActivated;
             }
 
-            print("SpawnManager unsubscribed from all SpawnPoints.");
+            // print("SpawnManager unsubscribed from all SpawnPoints.");
         }
 
         private void SpawnPoint_OnSpawnPointActivated(object sender, System.EventArgs e)
@@ -44,10 +44,7 @@ namespace TopDown.Misc
 
                 activeSpawnPoint = (SpawnPoint)sender;
                 currentPlayerSpawnPoint = activeSpawnPoint.PlayerSpawnPosition.transform.position;
-
-                print("Player new spawn point updated successfuly.");
             }
-            else Debug.Log("sender is not SpawnPoint!");
         }
 
         public IEnumerator StartPlayerSpawnSequence()
