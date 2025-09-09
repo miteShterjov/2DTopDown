@@ -21,7 +21,8 @@ namespace TopDown.Enemy
         private bool isDead = false;
         private Knockback knockback;
         private SpriteRenderer spriteRenderer;
-        private UIHealthBar healthBar;
+        private UIHealthBar healthBarInstance;
+
 
         void Awake()
         {
@@ -31,18 +32,29 @@ namespace TopDown.Enemy
         void Start()
         {
             CurrentHealth = maxHealth;
-            healthBar = Instantiate(healthBarPrefab, transform.position, Quaternion.identity, transform);
-            healthBar.SetHealth(CurrentHealth, MaxHealth);
+            healthBarInstance = Instantiate(
+                healthBarPrefab,
+                transform.position + new Vector3(0, 1, 0),
+                Quaternion.identity,
+                transform
+                );
         }
         void Update()
         {
             if (CurrentHealth <= 0) isDead = true;
+
+            // Show health bar when first damaged
+            if (currentHealth < maxHealth)
+            {
+                healthBarInstance.EnableHealthBar();
+                if (healthBarInstance.IsEnabled == false) healthBarInstance.UpdateHealthbar(currentHealth, maxHealth);
+            }
         }
 
         public void TakeDamage(int damage)
         {
             CurrentHealth -= damage;
-            healthBar.SetHealth(CurrentHealth, MaxHealth);
+            healthBarInstance.UpdateHealthbar(MaxHealth, CurrentHealth);
             DoDamageEyeCandy();
 
             if (CurrentHealth <= 0) StartCoroutine(WaitKnockbackThenDie());

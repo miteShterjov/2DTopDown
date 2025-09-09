@@ -1,3 +1,4 @@
+using TopDown.Player;
 using TopDown.SceneManagment;
 using UnityEngine;
 
@@ -19,6 +20,8 @@ namespace TopDown.Weapons
         }
         public void Attack()
         {
+            if (Stamina.Instance.CurrentStamina < weaponInfo.attackCost) return;
+            Stamina.Instance.UseStamina();
             animator.SetTrigger(FIRE_HASH);
             GameObject arrow = Instantiate(arrowPrefab, arrowSpawnPoint.position, ActiveWeapon.Instance.transform.rotation);
             arrow.transform.localScale = new Vector3(-1f * arrow.transform.localScale.x,

@@ -16,3 +16,4 @@ MonoBehaviour:
   weaponRange: 0
   weaponPrefab: {fileID: 7051657908415259987, guid: 3f793a3a285512b4e9394b00255ab541, type: 3}
   weaponCooldown: 0.8
+  attackCost: 1

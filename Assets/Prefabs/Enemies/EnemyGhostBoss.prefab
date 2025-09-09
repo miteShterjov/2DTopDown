@@ -21,6 +21,7 @@ GameObject:
   - component: {fileID: 2497539307006901109}
   - component: {fileID: 4605055880501696677}
   - component: {fileID: 7897174630223978923}
+  - component: {fileID: 2942820614574744}
   m_Layer: 0
   m_Name: EnemyGhostBoss
   m_TagString: Enemy
@@ -213,11 +214,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 489b8341b00ee3040972fab16c7c464c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 15
+  maxHealth: 42
   dieDelay: 0.5
   deathVFX: {fileID: 2487327354532175441, guid: 35531be4c3afcc5419911a2f0239ff0d, type: 3}
   currentHealth: 0
-  healthBarPrefab: {fileID: 1373281395900331734, guid: 5a104587bc26be94a84b5c18ef3bef84, type: 3}
+  healthBarPrefab: {fileID: 2566377138216787881, guid: 286f5cd61f7f4814ba062e5024ef1ba3, type: 3}
 --- !u!114 &3147021042464896887
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -314,9 +315,27 @@ MonoBehaviour:
   roamingSpeed: 2
   roamChangeDirectionCounter: 3
   waitBeforeNextMove: 1.5
-  enragedDuration: 5
   minionPrefab: {fileID: 4993490046625509684, guid: 5d02ae3dec19944448d65072540db938, type: 3}
   minionCount: 3
+--- !u!114 &2942820614574744
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4993490046625509684}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4f727abb734c87042b075be084ff7292, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::TopDown.Enemy.EnemyAI
+  roamChangeDirectionCounter: 0
+  attackRange: 0
+  attackCooldown: 1
+  enemyType: {fileID: 7897174630223978923}
+  stopMovingWhileAttacking: 0
+  waitBeforeNextMove: 1.5
+  roamingSpeed: 2
 --- !u!1 &8735890412657840338
 GameObject:
   m_ObjectHideFlags: 0

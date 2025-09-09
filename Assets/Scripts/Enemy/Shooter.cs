@@ -62,7 +62,9 @@ namespace TopDown.Enemy
 
         public void SummonGhostAttack()
         {
-            int spawnAmmount = Random.Range(2, 5);
+            int min = 1;
+            int max = 4;
+            int spawnAmmount = Random.Range(min, max);
             for (int i = 0; i < spawnAmmount; i++)
             {
                 Vector2 spawnPos = (Vector2)transform.position + Random.insideUnitCircle * 2f;

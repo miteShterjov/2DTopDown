@@ -43,6 +43,8 @@ namespace TopDown.Weapons
 
         public void Attack()
         {
+            if (Stamina.Instance.CurrentStamina < weaponInfo.attackCost) return;
+            Stamina.Instance.UseStamina();
             animator.SetTrigger("Attack");
             weaponColider.gameObject.SetActive(true);
             slashVFX = Instantiate(slashAnimPrefab, slashAnimSpawner.position, slashAnimSpawner.rotation);

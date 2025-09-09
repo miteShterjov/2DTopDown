@@ -111,5 +111,11 @@ namespace TopDown.Player
             healthSlider.maxValue = maxHealth;
             healthSlider.value = currentHealth;
         }
+
+        internal void ResetHealth()
+        {
+            currentHealth = maxHealth;
+            UpdateHealthSlider();
+        }
     }
 }

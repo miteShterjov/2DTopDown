@@ -7,6 +7,8 @@ namespace TopDown.Enemy
 {
     public class BossAI : MonoBehaviour
     {
+        public static event Action OnBossDeath; // Event for boss death
+
         public enum BossState
         {
             Idle,
@@ -16,7 +18,7 @@ namespace TopDown.Enemy
 
         [Header("Attack Settings")]
         [SerializeField] private float attackRange = 8f;
-        [SerializeField] private float attackCooldown = 2f;
+        // [SerializeField] private float attackCooldown = 2f;
 
         [Header("Idle Settings")]
         [SerializeField] private float roamingSpeed = 2f;
@@ -24,9 +26,9 @@ namespace TopDown.Enemy
         [SerializeField] private float waitBeforeNextMove = 1.5f;
 
         [Header("Enraged Settings")]
-        [SerializeField] private float enragedDuration = 5f;
+        // [SerializeField] private float enragedDuration = 5f;
         [SerializeField] private GameObject minionPrefab;
-        [SerializeField] private int minionCount = 3;
+        //[SerializeField] private int minionCount = 3;
 
         private BossState currentState;
         private Vector2 roamDirection;
@@ -66,6 +68,8 @@ namespace TopDown.Enemy
                 }
                 summonTimer = GetSummonInterval();
             }
+
+            if (GetComponent<EnemyHealth>().CurrentHealth <= 0) OnBossDeath?.Invoke();
         }
 
         private void BossStateControl()
@@ -140,12 +144,10 @@ namespace TopDown.Enemy
                 return;
             }
 
-            // based on boss health dirrefernt types of attacks
             float hpPersentage = (float)GetComponent<EnemyHealth>().CurrentHealth / (float)GetComponent<EnemyHealth>().MaxHealth;
 
             if (hpPersentage > 0.3f)
             {
-                // pick at random between basic and spray
                 int attackChoice = UnityEngine.Random.Range(0, 2);
                 if (attackChoice == 0) shooter.BasicConeAttack();
                 if (attackChoice == 1) shooter.BasicSprayAttack();
@@ -155,6 +157,8 @@ namespace TopDown.Enemy
             {
                 currentState = BossState.Enraged;
             }
+
+            
         }
 
         private void HandleEnragedState()

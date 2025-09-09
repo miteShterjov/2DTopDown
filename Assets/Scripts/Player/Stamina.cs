@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using TopDown.SceneManagment;
 using UnityEngine;
@@ -12,7 +13,7 @@ namespace TopDown.Player
         [SerializeField] private int staminaRefreshRate = 3;
 
         private Transform staminaContainer;
-        private int startingStamina = 3;
+        private int startingStamina = 7;
         private int maxStamina;
         const string STAMINA_CONTAINER = "Stamina Grid";
 
@@ -33,6 +34,8 @@ namespace TopDown.Player
 
         public void UseStamina()
         {
+            if (CurrentStamina <= 0) return;
+            
             CurrentStamina--;
             UpdateStaminaImages();
         }
@@ -65,6 +68,12 @@ namespace TopDown.Player
                 yield return new WaitForSeconds(staminaRefreshRate);
                 RefreshStamina();
             }
+        }
+
+        internal void ResetStamina()
+        {
+            CurrentStamina = startingStamina;
+            UpdateStaminaImages();
         }
     }
 }

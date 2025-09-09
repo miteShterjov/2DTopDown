@@ -30,8 +30,12 @@ namespace TopDown.Weapons
 
         public void Attack()
         {
-            animator.SetTrigger(FIRE_HASH);
-            AudioManager.Instance.PlayPlayerAttackSFX("Staff");
+            if (!EconomyManager.Instance.SpentGold(weaponInfo.attackCost)) return;
+            else
+            {
+                animator.SetTrigger(FIRE_HASH);
+                AudioManager.Instance.PlayPlayerAttackSFX("Staff");
+            }
         }
 
         public void SpawnStaffProjectileAnimEvent()

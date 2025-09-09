@@ -6,23 +6,33 @@ namespace TopDown.Misc
 {
     public class UIHealthBar : MonoBehaviour
     {
-        [SerializeField] private Slider slider;
-        [SerializeField] Vector3 offset;
-        [SerializeField] private Color high;
-        [SerializeField] private Color low;
+        public bool IsEnabled { get => isEnabled; set => isEnabled = value; }
+        [SerializeField] private Image background;
+        [SerializeField] private Image healthBar;
+        [SerializeField] float reduceSpeed = 2f;
+        private float target = 1f;
+        private bool isEnabled;
 
+        void Start()
+        {
+            background.gameObject.SetActive(false);
+        }
         void Update()
         {
-            this.slider.transform.position = Camera.main.WorldToScreenPoint(transform.parent.position + offset);
+            healthBar.fillAmount = Mathf.MoveTowards(healthBar.fillAmount, target, reduceSpeed * Time.deltaTime);
+            healthBar.color = Color.Lerp(Color.red, Color.green, healthBar.fillAmount);
         }
 
-        public void SetHealth(float currentHealth, float maxHealth)
+        public void EnableHealthBar()
         {
-            slider.gameObject.SetActive(currentHealth < maxHealth);
-            slider.value = currentHealth;
-            slider.maxValue = maxHealth;
+            background.gameObject.SetActive(true);
+            IsEnabled = true;
+        }
 
-            slider.fillRect.GetComponentInChildren<Image>().color = Color.Lerp(low, high, slider.normalizedValue);
+
+        public void UpdateHealthbar(float MaxHealth, float CurrentHealth)
+        {
+            target = CurrentHealth / MaxHealth;
         }
     }
 }

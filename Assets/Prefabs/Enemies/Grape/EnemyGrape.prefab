@@ -326,7 +326,7 @@ MonoBehaviour:
   dieDelay: 0.5
   deathVFX: {fileID: 2487327354532175441, guid: 732c7af96d909a2489f2d4af7e35348e, type: 3}
   currentHealth: 0
-  healthBarPrefab: {fileID: 1373281395900331734, guid: 5a104587bc26be94a84b5c18ef3bef84, type: 3}
+  healthBarPrefab: {fileID: 2566377138216787881, guid: 286f5cd61f7f4814ba062e5024ef1ba3, type: 3}
 --- !u!114 &4783286665029504347
 MonoBehaviour:
   m_ObjectHideFlags: 0

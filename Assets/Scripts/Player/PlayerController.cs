@@ -101,5 +101,13 @@ namespace TopDown.Player
         {
             if (!canAttack) moveSpeed = 0; 
         }
+
+        internal void ResetPlayerState()
+        {
+            transform.position = new Vector3((float)-23.7700005, (float)-6.05000019, 0);
+            Stamina.Instance.ResetStamina();
+            EconomyManager.Instance.ResetCurrentGold();
+            PlayerHealthController.Instance.ResetHealth();
+        }
     }
 }
